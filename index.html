@@ -1,0 +1,77 @@
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>GrayScale Converter</title>
+        <meta name="viewport"  content="width=device-width inital-scale-1.0">
+        <meta name="description" content="The HTML5 Herald">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="author" content="SitePoint">
+
+        <style>
+            h1 {
+                font-family: arial;
+                color: dimgray;
+            }
+            
+            body {
+                font-family: arial;
+                margin: 30px;
+            }
+            
+            canvas {
+                height: 200px;
+                border: 1px solid lightgray;
+            }
+            
+            input {
+                font-size: 14pt;
+            }            
+        </style>
+        <script src="https://www.dukelearntoprogram.com/course1/common/js/image/SimpleImage.js">
+        </script>     
+
+        <script>
+            var image = null;
+
+                function upload() {
+                //Get input from file input
+                var fileinput = document.getElementById("finput");
+                //Make new SimpleImage from file input
+                image = new SimpleImage(fileinput);
+                //Get canvas
+                var canvas = document.getElementById("can");
+                //Draw image on canvas
+                image.drawTo(canvas);
+                }
+
+                function makeGray() {
+                //change all pixels of image to gray
+                for (var pixel of image.values()) {
+                    var avg = (pixel.getRed()+pixel.getGreen()+pixel.getBlue())/3;
+                    pixel.setRed(avg);
+                    pixel.setGreen(avg);
+                    pixel.setBlue(avg);
+                }
+                //display new image
+                var canvas = document.getElementById("can");
+                image.drawTo(canvas);
+                }             
+        </script>
+
+
+    </head>
+
+    <body>     
+        <h1>Convert Image to Grayscale</h1>
+
+        <canvas id="can">
+        </canvas>
+
+        <p>
+            <input type="file" multiple="false" accept="image/*" id="finput" onchange="upload()" >
+        </p>
+        <p>
+            <input type="button" value="Make Grayscale" onclick="makeGray()" >
+        </p>
+    </body>
+</html>
